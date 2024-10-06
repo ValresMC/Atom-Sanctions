@@ -18,6 +18,8 @@ namespace Valres\AtomSanctions;
 use JsonException;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
+use Valres\AtomSanctions\listeners\PlayerChat;
+use Valres\AtomSanctions\listeners\PlayerPreLogin;
 use Valres\AtomSanctions\managers\commands\CommandsManager;
 use Valres\AtomSanctions\managers\files\FilesManager;
 use Valres\AtomSanctions\managers\sanctions\SanctionsManager;
@@ -33,6 +35,9 @@ class AtomSanctions extends PluginBase
         FilesManager::getInstance()->load();
         SanctionsManager::getInstance()->load();
         CommandsManager::getInstance()->load();
+
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerChat(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerPreLogin(), $this);
     }
 
     protected function onLoad(): void {
