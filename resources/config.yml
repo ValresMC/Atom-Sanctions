@@ -1,2 +1,11 @@
 player-already-ban: "§cThis player is already ban !"
+player-not-ban: "§cThis player is not ban !"
 ban-screen: "§cYou have been banned from this server.\nFor: {reason}\nFor: {remaining}\nBy: {author}"
+ban-message: "§cThe player {player} have been banned from this server for {reason} for {remaining} by {author} !"
+unban-message: "§aThe player {player} has been unbanned by {author}."
+
+player-already-mute: "§cThis player is already mute !"
+player-not-mute: "§cThis player is not mute !"
+mute-screen: "§cYou have been muted from this server.\nFor: {reason}\nFor: {remaining}\nBy: {author}"
+mute-message: "§cThe player {player} have been muted from this server for {reason} for {remaining} by {author} !"
+unmuted-message: "§aThe player {player} has been unmuted by {author}."

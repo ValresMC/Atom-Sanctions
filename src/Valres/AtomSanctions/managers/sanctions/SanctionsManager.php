@@ -101,6 +101,10 @@ class SanctionsManager
         $this->bans[$ban->getPlayerName()] = $ban;
     }
 
+    public function deleteBan(string $playerName): void {
+        unset($this->bans[$playerName]);
+    }
+
     public function getMutes(): array {
         return $this->mutes;
     }
@@ -123,6 +127,10 @@ class SanctionsManager
         }
 
         $this->mutes[$mute->getPlayerName()] = $mute;
+    }
+
+    public function deleteMute(string $playerName): void {
+        unset($this->mutes[$playerName]);
     }
 
     /** @throws JsonException */

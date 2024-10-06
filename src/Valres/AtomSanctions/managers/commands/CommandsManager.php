@@ -20,6 +20,9 @@ use pocketmine\command\SimpleCommandMap;
 use pocketmine\Server;
 use pocketmine\utils\SingletonTrait;
 use Valres\AtomSanctions\commands\BanCommand;
+use Valres\AtomSanctions\commands\MuteCommand;
+use Valres\AtomSanctions\commands\UnbanCommand;
+use Valres\AtomSanctions\commands\UnmuteCommand;
 
 class CommandsManager
 {
@@ -32,12 +35,15 @@ class CommandsManager
         $this->unenregisterCommands();
 
         $this->factory->registerAll("sanctions", [
-            new BanCommand()
+            new BanCommand(),
+            new MuteCommand(),
+            new UnbanCommand(),
+            new UnmuteCommand()
         ]);
     }
 
     public function unenregisterCommands(): void {
-        $commands = ["ban", "unban", "kick"];
+        $commands = ["ban", "unban"];
 
         foreach($commands as $command){
             $cmd = $this->factory->getCommand($command);

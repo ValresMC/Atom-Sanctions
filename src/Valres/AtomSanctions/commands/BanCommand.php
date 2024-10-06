@@ -61,5 +61,11 @@ class BanCommand extends Command
                 $config->get("ban-screen")
             ));
         }
+
+        Server::getInstance()->broadcastMessage(str_replace(
+            ["{player}", "{reason}", "{remaining}", "{author}"],
+            [$targetName, $reason, TimeHelper::timeToString($time), $sender->getName()],
+            $config->get("ban-message")
+        ));
     }
 }
