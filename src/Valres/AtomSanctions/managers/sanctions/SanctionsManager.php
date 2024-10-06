@@ -7,8 +7,8 @@ namespace Valres\AtomSanctions\managers\sanctions;
 use JsonException;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
-use Valres\AtomSanctions\events\PlayerBanEvent;
-use Valres\AtomSanctions\events\PlayerMuteEvent;
+use Valres\AtomSanctions\events\BanEvent;
+use Valres\AtomSanctions\events\MuteEvent;
 use Valres\AtomSanctions\managers\files\FilesManager;
 use Valres\AtomSanctions\managers\sanctions\types\Ban;
 use Valres\AtomSanctions\managers\sanctions\types\Mute;
@@ -80,7 +80,7 @@ class SanctionsManager
 
     public function addBan(string $playerName, Ban $ban, bool $new = false): void {
         if($new){
-            $ev = new PlayerBanEvent($playerName, $ban);
+            $ev = new BanEvent($playerName, $ban);
             if($ev->isCancelled()){
                 return;
             }
@@ -104,7 +104,7 @@ class SanctionsManager
 
     public function addMute(string $playerName, Mute $mute, bool $new = false): void {
         if($new){
-            $ev = new PlayerMuteEvent($playerName, $mute);
+            $ev = new MuteEvent($playerName, $mute);
             if($ev->isCancelled()){
                 return;
             }

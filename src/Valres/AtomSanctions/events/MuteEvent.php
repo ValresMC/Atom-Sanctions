@@ -9,18 +9,13 @@ use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
 use Valres\AtomSanctions\managers\sanctions\types\Mute;
 
-class PlayerMuteEvent extends Event implements Cancellable
+final class MuteEvent extends Event implements Cancellable
 {
     use CancellableTrait;
 
     public function __construct(
-        protected string $playerName,
-        protected Mute $mute
+        protected readonly Mute $mute
     ) {}
-
-    public function getPlayerName(): string {
-        return $this->playerName;
-    }
 
     public function getMute(): Mute {
         return $this->mute;

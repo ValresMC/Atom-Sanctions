@@ -9,18 +9,13 @@ use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
 use Valres\AtomSanctions\managers\sanctions\types\Ban;
 
-class PlayerBanEvent extends Event implements Cancellable
+final class BanEvent extends Event implements Cancellable
 {
     use CancellableTrait;
 
     public function __construct(
-        protected string $playerName,
-        protected Ban $ban
+        protected readonly Ban $ban
     ) {}
-
-    public function getPlayerName(): string {
-        return $this->playerName;
-    }
 
     public function getBan(): Ban {
         return $this->ban;
