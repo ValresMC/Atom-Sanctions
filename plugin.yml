@@ -1,0 +1,5 @@
+name: Atom-Santions
+author: Atom-Valres
+version: 1.0.0
+api: [5.0.0]
+main: Valres\AtonSanctions\AtomSanctions
