@@ -19,6 +19,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\permission\Permission;
+use pocketmine\permission\PermissionManager;
 use pocketmine\Server;
 use Valres\AtomSanctions\AtomSanctions;
 use Valres\AtomSanctions\managers\sanctions\SanctionsManager;
@@ -29,7 +30,7 @@ class MuteCommand extends Command
 {
     public function __construct() {
         parent::__construct("mute", "Mute a player", "usage : /mute <player> <time> <?reason>");
-        DefaultPermissions::registerPermission(new Permission("sanction.mute.command", "Mute a player", [DefaultPermissions::ROOT_OPERATOR]));
+        DefaultPermissions::registerPermission(new Permission("sanction.mute.command", "Mute a player"), [PermissionManager::getInstance()->getPermission(DefaultPermissions::ROOT_OPERATOR)]);
         $this->setPermission("sanction.mute.command");
     }
 

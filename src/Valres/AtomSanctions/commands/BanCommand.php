@@ -19,6 +19,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\permission\DefaultPermissions;
 use pocketmine\permission\Permission;
+use pocketmine\permission\PermissionManager;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use Valres\AtomSanctions\AtomSanctions;
@@ -30,7 +31,7 @@ class BanCommand extends Command
 {
     public function __construct() {
         parent::__construct("ban", "Ban a player", "usage : /ban <player> <time> <?reason>");
-        DefaultPermissions::registerPermission(new Permission("sanction.ban.command", "Ban a player", [DefaultPermissions::ROOT_OPERATOR]));
+        DefaultPermissions::registerPermission(new Permission("sanction.ban.command", "Ban a player"), [PermissionManager::getInstance()->getPermission(DefaultPermissions::ROOT_OPERATOR)]);
         $this->setPermission("sanction.ban.command");
     }
 
