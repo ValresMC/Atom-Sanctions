@@ -80,7 +80,7 @@ class SanctionsManager
 
     public function addBan(string $playerName, Ban $ban, bool $new = false): void {
         if($new){
-            $ev = new BanEvent($playerName, $ban);
+            $ev = new BanEvent($ban);
             if($ev->isCancelled()){
                 return;
             }
@@ -104,7 +104,7 @@ class SanctionsManager
 
     public function addMute(string $playerName, Mute $mute, bool $new = false): void {
         if($new){
-            $ev = new MuteEvent($playerName, $mute);
+            $ev = new MuteEvent($mute);
             if($ev->isCancelled()){
                 return;
             }
