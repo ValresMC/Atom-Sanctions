@@ -90,6 +90,7 @@ class SanctionsManager
     }
 
     public function addBan(Ban $ban, bool $new = false): void {
+        if($ban->getTime() < time()) return;
         if($new){
             $ev = new BanEvent($ban);
             if($ev->isCancelled()){
@@ -118,6 +119,7 @@ class SanctionsManager
     }
 
     public function addMute(Mute $mute, bool $new = false): void {
+        if($mute->getTime() < time()) return;
         if($new){
             $ev = new MuteEvent($mute);
             if($ev->isCancelled()){
