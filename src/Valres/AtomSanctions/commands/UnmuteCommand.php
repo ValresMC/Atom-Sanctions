@@ -23,8 +23,6 @@ use pocketmine\permission\PermissionManager;
 use pocketmine\Server;
 use Valres\AtomSanctions\AtomSanctions;
 use Valres\AtomSanctions\managers\sanctions\SanctionsManager;
-use Valres\AtomSanctions\managers\sanctions\types\Mute;
-use Valres\AtomSanctions\utils\TimeHelper;
 
 class UnmuteCommand extends Command
 {
