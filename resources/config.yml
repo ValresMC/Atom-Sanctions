@@ -1,1 +1,2 @@
-[]
+player-already-ban: "§cThis player is already ban !"
+ban-screen: "§cYou have been banned from this server.\nFor: {reason}\nFor: {remaining}\nBy: {author}"

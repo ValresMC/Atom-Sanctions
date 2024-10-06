@@ -1,5 +1,16 @@
 <?php
 
+/**
+ *    _____   __                           ________
+ *   /  _  \_/  |_  ____   _____           \______ \   _______  __
+ *  /  /_\  \   __\/  _ \ /     \   ______  |    |  \_/ __ \  \/ /
+ * /    |    \  | (  (_) )  Y Y  \ /_____/  |    `   \  ___/\   /
+ * \____|____/__|  \____/|__|_|__/         /_________/\_____>\_/
+ *
+ * @author ValresMC
+ * @version v0.0.1
+ */
+
 declare(strict_types = 1);
 
 namespace Valres\AtomSanctions\managers\sanctions;
@@ -32,12 +43,12 @@ class SanctionsManager
 
         foreach($this->banDatas->getAll() as $playerName => $data){
             $ban = new Ban($playerName, $data["time"], $data["reason"], $data["authorName"]);
-            $this->addBan($playerName, $ban);
+            $this->addBan($ban);
         }
 
         foreach($this->muteDatas->getAll() as $playerName => $data){
             $mute = new Mute($playerName, $data["time"], $data["reason"], $data["authorName"]);
-            $this->addMute($playerName, $mute);
+            $this->addMute($mute);
         }
 
         $this->banDatas->setAll([]);
@@ -78,7 +89,7 @@ class SanctionsManager
         return isset($this->bans[$playerName]);
     }
 
-    public function addBan(string $playerName, Ban $ban, bool $new = false): void {
+    public function addBan(Ban $ban, bool $new = false): void {
         if($new){
             $ev = new BanEvent($ban);
             if($ev->isCancelled()){
@@ -87,7 +98,7 @@ class SanctionsManager
             $ev->call();
         }
 
-        $this->bans[$playerName] = $ban;
+        $this->bans[$ban->getPlayerName()] = $ban;
     }
 
     public function getMutes(): array {
@@ -102,7 +113,7 @@ class SanctionsManager
         return isset($this->mutes[$playerName]);
     }
 
-    public function addMute(string $playerName, Mute $mute, bool $new = false): void {
+    public function addMute(Mute $mute, bool $new = false): void {
         if($new){
             $ev = new MuteEvent($mute);
             if($ev->isCancelled()){
@@ -111,7 +122,7 @@ class SanctionsManager
             $ev->call();
         }
 
-        $this->mutes[$playerName] = $mute;
+        $this->mutes[$mute->getPlayerName()] = $mute;
     }
 
     /** @throws JsonException */
