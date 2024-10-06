@@ -6,6 +6,7 @@ namespace Valres\AtomSanctions\managers\sanctions;
 
 use JsonException;
 use pocketmine\utils\Config;
+use pocketmine\utils\SingletonTrait;
 use Valres\AtomSanctions\events\PlayerBanEvent;
 use Valres\AtomSanctions\events\PlayerMuteEvent;
 use Valres\AtomSanctions\managers\files\FilesManager;
@@ -14,6 +15,8 @@ use Valres\AtomSanctions\managers\sanctions\types\Mute;
 
 class SanctionsManager
 {
+    use SingletonTrait;
+
     /** @var Ban[] */
     private array $bans = [];
     /** @var Mute[] */
