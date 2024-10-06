@@ -7,22 +7,22 @@ namespace Valres\AtomSanctions\events;
 use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
-use Valres\AtomSanctions\managers\sanctions\types\Ban;
+use Valres\AtomSanctions\managers\sanctions\types\Mute;
 
-class PlayerBanEvent extends Event implements Cancellable
+class PlayerMuteEvent extends Event implements Cancellable
 {
     use CancellableTrait;
 
     public function __construct(
         protected string $playerName,
-        protected Ban $ban
+        protected Mute $mute
     ) {}
 
     public function getPlayerName(): string {
         return $this->playerName;
     }
 
-    public function getBan(): Ban {
-        return $this->ban;
+    public function getMute(): Mute {
+        return $this->mute;
     }
 }
