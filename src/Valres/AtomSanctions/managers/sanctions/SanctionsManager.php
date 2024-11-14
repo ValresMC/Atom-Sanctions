@@ -41,15 +41,8 @@ class SanctionsManager
         $this->banDatas  = FilesManager::getInstance()->getFile(FilesManager::BANS);
         $this->muteDatas = FilesManager::getInstance()->getFile(FilesManager::MUTES);
 
-        foreach($this->banDatas->getAll() as $playerName => $data){
-            $ban = new Ban($playerName, $data["time"], $data["reason"], $data["authorName"]);
-            $this->addBan($ban);
-        }
-
-        foreach($this->muteDatas->getAll() as $playerName => $data){
-            $mute = new Mute($playerName, $data["time"], $data["reason"], $data["authorName"]);
-            $this->addMute($mute);
-        }
+        foreach($this->banDatas->getAll() as $data) $this->addBan(Ban::fromArray($data));
+        foreach($this->muteDatas->getAll() as $data) $this->addMute(Mute::fromArray($data));
 
         $this->banDatas->setAll([]);
         $this->muteDatas->setAll([]);
@@ -58,21 +51,13 @@ class SanctionsManager
 
     /** @throws JsonException */
     public function save(): void {
-        foreach($this->bans as $playerName => $ban){
-            $this->banDatas->set($playerName, [
-                "time" => $ban->getTime(),
-                "reason" => $ban->getReason(),
-                "authorName" => $ban->getAuthorName()
-            ]);
-        }
+        $bans = [];
+        foreach($this->bans as $ban) $bans[] = $ban->toArray();
+        $this->banDatas->setAll($bans);
 
-        foreach($this->mutes as $playerName => $mute){
-            $this->muteDatas->set($playerName, [
-                "time" => $mute->getTime(),
-                "reason" => $mute->getReason(),
-                "authorName" => $mute->getAuthorName()
-            ]);
-        }
+        $mutes = [];
+        foreach($this->mutes as $playerName => $mute) $mutes[] = $mute->toArray();
+        $this->muteDatas->setAll($mutes);
 
         $this->saveData();
     }
@@ -122,9 +107,7 @@ class SanctionsManager
         if($mute->getTime() < time()) return;
         if($new){
             $ev = new MuteEvent($mute);
-            if($ev->isCancelled()){
-                return;
-            }
+            if($ev->isCancelled()) return;
             $ev->call();
         }
 

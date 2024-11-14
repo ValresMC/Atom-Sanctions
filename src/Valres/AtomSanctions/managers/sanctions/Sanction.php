@@ -15,7 +15,9 @@ declare(strict_types = 1);
 
 namespace Valres\AtomSanctions\managers\sanctions;
 
-class Sanction
+use Valres\AtomSanctions\managers\ArraySerializable;
+
+class Sanction implements ArraySerializable
 {
     public function __construct(
         protected string $playerName,

@@ -19,5 +19,21 @@ use Valres\AtomSanctions\managers\sanctions\Sanction;
 
 class Mute extends Sanction
 {
+    public function toArray(): array {
+        return [
+            "playerName" => $this->playerName,
+            "time" => $this->time,
+            "reason" => $this->reason,
+            "authorName" => $this->authorName
+        ];
+    }
 
+    public static function fromArray(array $data): self {
+        return new self(
+            $data["playerName"],
+            $data["time"],
+            $data["reason"],
+            $data["authorName"]
+        );
+    }
 }
